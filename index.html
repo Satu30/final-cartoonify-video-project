@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Cartoonify Video</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #2b2d42;
+            margin-bottom: 1rem;
+        }
+
+        form {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        input[type="file"] {
+            margin-bottom: 1rem;
+        }
+
+        button {
+            background-color: #8d99ae;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2b2d42;
+        }
+
+        .video-preview, .download-link {
+            width: 100%;
+            max-width: 640px;
+            text-align: center;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        a.download-btn {
+            background-color: #ef233c;
+            padding: 0.7rem 1.2rem;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        a.download-btn:hover {
+            background-color: #d90429;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎥 Anime Cartoonify Your Video</h1>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="video" accept="video/*" required>
+        <br>
+        <button type="submit">Upload & Cartoonify</button>
+    </form>
+
+    {% if cartoonified %}
+    <div class="video-preview">
+        <h2>✨ Cartoonified Video Preview</h2>
+        <video controls>
+            <source src="{{ url_for('static', filename='cartoon_output.avi') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="download-link">
+        <a href="{{ url_for('static', filename='cartoon_output.avi') }}" download class="download-btn">⬇️ Download Cartoonified Video</a>
+    </div>
+    {% endif %}
+</body>
+</html>
